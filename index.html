@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Portfolio | Nur Akifa Rifai</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Lora', 'serif'],
+                    },
+                    colors: {
+                        primary: '#6b21a8', // Purple-800
+                        secondary: '#a21caf', // Fuchsia-700
+                        accent: '#d97706', // Amber-600
+                        bglight: '#faf5ff', // Sangat condong ke ungu muda yang lembut
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f3e8ff; }
+        ::-webkit-scrollbar-thumb { background: #d8b4fe; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c084fc; }
+        
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .active-nav {
+            color: #6b21a8 !important;
+            border-color: #6b21a8 !important;
+        }
+    </style>
+</head>
+<body class="bg-bglight text-slate-800 font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass-nav border-b border-purple-100 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <div class="flex flex-col">
+                        <span class="text-xl font-bold tracking-tight text-primary flex items-center gap-2">
+                            <i class="fa-solid fa-graduation-cap"></i> E-PORTFOLIO
+                        </span>
+                        <span class="text-xs font-semibold text-purple-400 uppercase tracking-widest">PPG Terbimbing</span>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-1 lg:space-x-4">
+                    <button data-target="beranda" class="nav-link px-3 py-2 text-sm font-semibold transition-colors border-b-2 border-transparent hover:text-primary active-nav">Beranda</button>
+                    <button data-target="profil" class="nav-link px-3 py-2 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:text-primary">Profil</button>
+                    <button data-target="analisis" class="nav-link px-3 py-2 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:text-primary">Analisis Artefak</button>
+                    <button data-target="penilaian" class="nav-link px-3 py-2 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:text-primary">Penilaian</button>
+                    <button data-target="model-guru" class="nav-link px-3 py-2 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:text-primary">Model Guru</button>
+                    <button data-target="dokumentasi" class="nav-link px-3 py-2 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:text-primary">Dokumentasi</button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-purple-700 hover:text-primary focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-purple-100 shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col">
+                <button data-target="beranda" class="nav-link-mobile block px-3 py-3 text-base font-semibold text-primary bg-purple-50 rounded-md text-left">Beranda</button>
+                <button data-target="profil" class="nav-link-mobile block px-3 py-3 text-base font-medium text-gray-600 hover:text-primary hover:bg-purple-50 rounded-md text-left">Profil Mahasiswa</button>
+                <button data-target="analisis" class="nav-link-mobile block px-3 py-3 text-base font-medium text-gray-600 hover:text-primary hover:bg-purple-50 rounded-md text-left">Analisis Artefak</button>
+                <button data-target="penilaian" class="nav-link-mobile block px-3 py-3 text-base font-medium text-gray-600 hover:text-primary hover:bg-purple-50 rounded-md text-left">Lampiran Penilaian</button>
+                <button data-target="model-guru" class="nav-link-mobile block px-3 py-3 text-base font-medium text-gray-600 hover:text-primary hover:bg-purple-50 rounded-md text-left">Model Guru</button>
+                <button data-target="dokumentasi" class="nav-link-mobile block px-3 py-3 text-base font-medium text-gray-600 hover:text-primary hover:bg-purple-50 rounded-md text-left">Dokumentasi Kegiatan</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow pt-24 pb-12 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- 1. HALAMAN BERANDA -->
+        <section id="beranda" class="page-section opacity-0 animate-fade-in">
+            <div class="flex flex-col-reverse lg:flex-row items-center gap-12 mt-10">
+                <div class="flex-1 space-y-6">
+                    <div class="inline-block px-4 py-1.5 bg-purple-100 text-primary font-medium rounded-full text-sm">
+                        <i class="fa-solid fa-star text-accent mr-1 animate-pulse"></i> Pendidikan Profesi Guru Calon Guru 2026
+                    </div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-slate-900">
+                        E-Portfolio <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Nur Akifa Rifai</span>
+                    </h1>
+                    <p class="text-lg text-slate-600 leading-relaxed max-w-2xl font-serif">
+                        Selamat datang di E-Portfolio Nur Akifa Rifai. Website ini merupakan ruang refleksi awal yang menjadi fondasi dasar dalam membentuk karakter saya sebagai mahasiswa PPG calon guru menuju guru yang profesional, reflektif, dan inovatif.
+                    </p>
+                    <div class="pt-4 flex gap-4">
+                        <button onclick="document.querySelector('[data-target=\'profil\']').click()" class="bg-primary hover:bg-purple-900 text-white px-6 py-3 rounded-lg font-medium transition shadow-lg shadow-purple-900/20 flex items-center gap-2">
+                            Mulai Eksplorasi <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex-1 w-full relative">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20 rounded-3xl transform rotate-3 scale-105"></div>
+                    <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80" onerror="this.src='https://via.placeholder.com/800x600?text=Mengajar+-+Nur+Akifa+Rifai'" alt="Aktivitas Mengajar" class="relative rounded-3xl shadow-2xl object-cover h-[400px] md:h-[500px] w-full border-4 border-white">
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. PROFIL MAHASISWA -->
+        <section id="profil" class="page-section hidden opacity-0">
+            <div class="mb-10 text-center">
+                <h2 class="text-3xl font-bold text-slate-900 mb-3">Profil Mahasiswa</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto rounded-full"></div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-purple-100">
+                <div class="grid grid-cols-1 lg:grid-cols-12">
+                    <!-- Bagian Kiri: Foto & Quote -->
+                    <div class="col-span-1 lg:col-span-4 bg-purple-50/30 p-8 flex flex-col items-center justify-center border-r border-purple-50">
+                        <div class="w-48 h-48 rounded-full border-4 border-white shadow-lg overflow-hidden mb-6 relative group">
+                            <img src="poto-profil-ppl.jpg" onerror="this.src='https://via.placeholder.com/600x600?text=Nur+Akifa+Rifai'" alt="Foto Profil" class="w-full h-full object-cover transition duration-300 group-hover:scale-110">
+                        </div>
+                        
+                        <h3 class="text-2xl font-bold text-slate-800 mb-6 text-center">NUR AKIFA RIFAI</h3>
+                        
+                        <div class="w-full space-y-4 text-left border-t border-purple-100 pt-6">
+                            <div>
+                                <p class="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-1">Kontak Email</p>
+                                <a href="mailto:nurakifarifa@gmail.com" class="flex items-center gap-2 text-slate-600 hover:text-primary transition text-sm">
+                                    <i class="fa-regular fa-envelope text-primary"></i> nurakifarifa@gmail.com
+                                </a>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-1">Nomor WhatsApp</p>
+                                <a href="https://wa.me/6282217068764" target="_blank" class="flex items-center gap-2 text-slate-600 hover:text-primary transition text-sm">
+                                    <i class="fa-brands fa-whatsapp text-emerald-600"></i> +62 822-1706-8764
+                                </a>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-1">Alamat Asal</p>
+                                <a href="https://maps.app.goo.gl/bJFgvRM5u3hushSRA" target="_blank" class="flex items-center gap-2 text-slate-600 hover:text-primary transition text-sm">
+                                    <i class="fas fa-map-marker-alt text-purple-600"></i> Samaenre, Kec. Sinjai Tengah, Kab. Sinjai, Sulawesi Selatan
+                                </a>
+                            </div>
+                        </div>
+
+                        <blockquote class="text-center font-serif italic text-slate-600 mt-8 px-4 border-t border-purple-100 pt-6 w-full">
+                            "Guru yang baik bukan hanya mengajarkan ilmu, tetapi juga menuntun murid menemukan potensi terbaik dalam dirinya."
+                        </blockquote>
+                    </div>
+
+                    <!-- Bagian Kanan: Biodata & Narasi -->
+                    <div class="col-span-1 lg:col-span-8 p-8 md:p-12">
+                        <h4 class="text-xl font-bold text-slate-800 mb-4 border-b border-purple-100 pb-2 flex items-center gap-2">
+                            <i class="fa-regular fa-id-card text-primary"></i> Data Diri Akademik
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 mb-8">
+                            <div>
+                                <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Nomor Induk Mahasiswa</p>
+                                <p class="font-medium text-slate-800">2590554950598</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">LPTK PPG</p>
+                                <p class="font-medium text-slate-800">Universitas Negeri Makassar</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Bidang Studi</p>
+                                <p class="font-medium text-slate-800">Broadcasting dan Perfilman</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Lokasi PPL Terbimbing</p>
+                                <p class="font-medium text-slate-800">SMK Negeri 2 Makassar</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Dosen Pendamping Lapangan</p>
+                                <p class="font-medium text-slate-800">Dr. Sanatang, S.Pd., M.T.</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Guru Pamong</p>
+                                <p class="font-medium text-slate-800">Sitti Rokmah, S.Si., M.Pd.</p>
+                            </div>
+                        </div>
+
+                        <h4 class="text-xl font-bold text-slate-800 mb-4 border-b border-purple-100 pb-2 flex items-center gap-2 mt-8">
+                            <i class="fa-solid fa-map-location-dot text-primary"></i> Asal & Keunikan Daerah
+                        </h4>
+                        <p class="text-slate-600 leading-relaxed mb-8">
+                            Saya berasal dari Kabupaten Sinjai. Kabupaten Sinjai memiliki keunikan yang tidak dimiliki banyak daerah lain karena memiliki bentang alam yang lengkap, mulai dari pegunungan, dataran rendah, pesisir pantai, hingga wilayah kepulauan. Sinjai juga dikenal dengan julukan "Bumi Panrita Kitta" yang menunjukkan kuatnya tradisi keilmuan dan nilai-nilai keagamaan yang diwariskan secara turun-temurun. Selain itu, Sinjai memiliki destinasi wisata unggulan seperti Pulau Sembilan dan Hutan Mangrove Tongke-Tongke yang menjadi kebanggaan masyarakat setempat.
+                        </p>
+
+                        <h4 class="text-xl font-bold text-slate-800 mb-4 border-b border-purple-100 pb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-seedling text-primary"></i> Inspirasi & Tujuan Menjadi Guru Profesional
+                        </h4>
+                        <p class="text-slate-600 leading-relaxed">
+                            Melihat kondisi bangsa saat ini yang masih menghadapi berbagai tantangan dalam bidang pendidikan, karakter, dan kualitas sumber daya manusia, saya semakin termotivasi untuk berkontribusi dalam mencerdaskan kehidupan bangsa. Saya meyakini bahwa kemajuan suatu negara tidak hanya ditentukan oleh perkembangan teknologi atau ekonomi, tetapi juga oleh kualitas pendidikan yang membentuk generasi penerusnya.
+
+Inspirasi saya untuk menjadi guru muncul dari keyakinan bahwa guru merupakan akar peradaban. Dari tangan seorang guru lahir pemimpin, ilmuwan, tenaga profesional, dan berbagai generasi yang akan menentukan arah masa depan bangsa. Oleh karena itu, perubahan besar bagi negara dapat dimulai dari ruang kelas melalui pendidikan yang berkualitas dan berkarakter.
+
+Saya menyadari bahwa untuk mengajak peserta didik menjadi pribadi yang baik, saya harus terlebih dahulu menjadi teladan yang baik. Guru bukan hanya bertugas menyampaikan ilmu pengetahuan, tetapi juga memberikan contoh dalam sikap, perilaku, dan nilai-nilai kehidupan. Melalui profesi guru, saya ingin berkontribusi dalam membentuk generasi yang cerdas, berintegritas, kritis, dan memiliki kepedulian terhadap masyarakat serta negaranya..
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. ANALISIS ARTEFAK PEMBELAJARAN -->
+        <section id="analisis" class="page-section hidden opacity-0">
+            <div class="mb-10 text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold text-slate-900 mb-3">Analisis Artefak Pembelajaran</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto rounded-full mb-6"></div>
+                <p class="text-slate-600 font-serif">
+                    Bagian ini memuat refleksi dan analisis mendalam terhadap produk pembelajaran (Perangkat Ajar, Media, atau Asesmen) yang telah disusun selama pelaksanaan PPL.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-xl p-8 mb-8 shadow-sm hover:shadow-lg transition-all duration-300 border-t-4 border-primary group">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-12 h-12 bg-purple-50 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-book text-2xl text-primary"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-800">Perangkat Pembelajaran</h3>
+                        <p class="text-xs text-slate-400">Modul Ajar & Lembar Kerja Peserta Didik (LKPD)</p>
+                    </div>
+                </div>
+                <p class="text-slate-600 leading-relaxed text-sm mb-6">
+                    Kendala utama yang saya hadapi dalam menyusun rencana pembelajaran ini adalah keterbatasan pengalaman dalam merancang perangkat pembelajaran dengan bantuan guru pamong saya di sekolah tempat saya ppl. Penyusunan rencana pembelajaran ini merupakan pengalaman pertama bagi saya, sehingga saya masih memerlukan waktu untuk memahami berbagai komponen yang harus disusun secara sistematis dan saling terintegrasi, mulai dari tujuan pembelajaran, asesmen, aktivitas pembelajaran, hingga penyusunan LKPD. Selain itu, saya juga harus memastikan bahwa seluruh komponen pembelajaran selaras dengan karakteristik murid dan capaian pembelajaran yang ingin dicapai. Kondisi tersebut membuat proses penyusunan rencana pembelajaran membutuhkan waktu, ketelitian, dan berbagai penyesuaian sebelum menghasilkan rancangan yang sesuai. Meskipun demikian, pengalaman ini menjadi kesempatan berharga bagi saya untuk belajar dan mengembangkan kompetensi profesional sebagai calon guru dalam merancang pembelajaran yang efektif, terstruktur, dan berpusat pada murid.
+                </p>
+                <a href=".." target="_blank" class="block w-full">
+                    <button class="w-full py-3 bg-purple-50 hover:bg-purple-100 text-primary font-semibold rounded-lg transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-eye"></i> Lihat Folder Perangkat di Google Drive
+                    </button>
+                </a>
+            </div>
+
+            <!-- Cards Grid Layout untuk 4 Aspek -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                
+                <!-- Card A: Kendala -->
+                <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border-t-4 border-red-400 group flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-triangle-exclamation text-2xl text-red-500"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-3">A. Kendala Penyusunan</h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            Selama penyusunan produk pembelajaran, kendala utama yang saya hadapi adalah merancang pembelajaran yang dapat mengakomodasi keberagaman karakteristik dan kemampuan murid. Meskipun telah melakukan asesmen diagnostik, saya masih mengalami kesulitan dalam menerjemahkan hasil pemetaan tersebut ke dalam Modul Ajar dan LKPD yang sesuai dengan kebutuhan setiap kelompok peserta didik. Tantangan terbesar adalah menentukan strategi pembelajaran yang mampu memberikan dukungan kepada peserta didik yang masih memerlukan bimbingan, sekaligus tetap memberikan tantangan yang bermakna bagi murid yang memiliki kemampuan lebih tinggi. Oleh karena itu, proses perencanaan dan penyusunan perangkat pembelajaran memerlukan waktu, refleksi, dan penyesuaian yang cukup intensif agar tujuan pembelajaran dapat tercapai secara optimal.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card B: Teori/Konsep -->
+                <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border-t-4 border-purple-500 group flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-purple-50 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-book-open text-2xl text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-3">B. Adopsi Teori & Pedagogi</h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            Landasan utama dalam penyusunan produk pembelajaran saya adalah filsafat Konstruktivisme yang diimplementasikan melalui model Problem-Based Learning (PBL). Pendekatan ini menekankan bahwa murid membangun pengetahuannya melalui pengalaman, eksplorasi, dan pemecahan masalah secara aktif. Penerapan prinsip tersebut terlihat dalam Modul Ajar dan LKPD yang saya susun, di mana pembelajaran diawali dengan penyajian masalah kontekstual melalui studi kasus yang relevan dengan materi. Selanjutnya, murid dibimbing untuk berdiskusi, melakukan penyelidikan, dan menemukan solusi secara kolaboratif melalui aktivitas yang terstruktur dalam LKPD. Dalam proses ini, peran guru tidak lagi menjadi sumber informasi utama, melainkan sebagai fasilitator yang mendampingi dan mengarahkan murid dalam membangun pemahamannya secara mandiri.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card C: Keberhasilan -->
+                <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border-t-4 border-emerald-500 group flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-emerald-50 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-chart-line text-2xl text-emerald-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-3">C. Faktor Keberhasilan</h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            Selama praktik mengajar, salah satu keberhasilan yang dilakukan adalah menerapkan model Problem Based Learning (PBL) dalam mengajar, meskipun masih ada beberapa hal yang perlu diperbaiki dan dievaluasi. Memanfaatkan teknologi digital sebagai media pembelajaran juga diterapkan dalam praktik mengajar. Hal ini sangat penting dalam mendukung proses belajar mengajar agar murid bisa lebih memahami apa yang saya sampaikan dengan bantuan visualisasi digital yang interaktif.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card D: Perubahan/Adaptasi -->
+                <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border-t-4 border-amber-500 group flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-amber-50 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-arrows-spin text-2xl text-amber-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-3">D. Adaptasi untuk Situasi Berbeda</h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            Jika produk ini diterapkan pada kelas dengan karakteristik siswa yang berbeda, khususnya jika rata-rata kemampuan kognitif dan daya tangkap siswa lebih rendah, komponen utama yang harus saya rombak adalah Lembar Kerja Peserta Didik (LKPD) dan Asesmen Formatif. Saya perlu mengubah instruksi pada LKPD menjadi lebih step-by-step (memberikan scaffolding atau perancah yang lebih banyak) agar siswa tidak frustrasi. Selain itu, saya perlu menyesuaikan bahan bacaan pada Modul Ajar agar menggunakan diksi yang lebih sederhana, serta memodifikasi rubrik penilaian agar target pencapaian (KKTP) lebih realistis dengan kondisi kesiapan belajar mereka saat itu.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. LAMPIRAN PENILAIAN -->
+        <section id="penilaian" class="page-section hidden opacity-0">
+            <div class="mb-10 text-center max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-slate-900 mb-3">Lampiran Penilaian PPL</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto rounded-full mb-6"></div>
+                <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded text-left shadow-sm">
+                    <p class="text-purple-900 text-sm">
+                        <strong>Keterangan:</strong> Bagian ini berisi hasil penilaian otentik dari Guru Pamong terkait rancangan perangkat pembelajaran (Lampiran 7) dan praktik mengajar di kelas (Lampiran 8) yang telah dilaksanakan selama seluruh siklus PPL.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Lampiran 7 -->
+                <div class="bg-white p-6 rounded-2xl shadow-md border border-purple-100 flex flex-col h-full">
+                    <div class="flex items-center gap-4 border-b border-purple-50 pb-4 mb-4">
+                        <div class="w-12 h-12 bg-purple-50 rounded-full flex items-center justify-center text-primary">
+                            <i class="fa-solid fa-file-signature text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-800">Lampiran 7</h3>
+                            <p class="text-sm text-slate-500">Instrumen Penilaian Perangkat Pembelajaran</p>
+                        </div>
+                    </div>
+                    <div class="flex-grow">
+                        <p class="text-sm text-slate-600 mb-4">Dokumen ini memuat nilai dan catatan dari Guru Pamong terhadap Modul Ajar/RPP, Media, LKPD, dan Instrumen Penilaian yang disusun pada siklus 1 hingga 3.</p>
+                        
+                        <div class="overflow-x-auto mb-4 border rounded-lg">
+                            <table class="min-w-full divide-y divide-gray-200 text-sm">
+                                <thead class="bg-purple-50/50">
+                                    <tr>
+                                        <th class="px-4 py-2 text-left font-medium text-purple-900">Siklus</th>
+                                        <th class="px-4 py-2 text-left font-medium text-purple-900">Materi Pokok</th>
+                                        <th class="px-4 py-2 text-left font-medium text-purple-900">Nilai</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-4 py-2">Siklus 1</td>
+                                        <td class="px-4 py-2">Tata Cahaya & Kamera</td>
+                                        <td class="px-4 py-2 font-semibold text-primary">A (90)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-2">Siklus 2</td>
+                                        <td class="px-4 py-2">Teknik Pengambilan Gambar</td>
+                                        <td class="px-4 py-2 font-semibold text-primary">A (92)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-2">Siklus 3</td>
+                                        <td class="px-4 py-2">Editing & Post Production</td>
+                                        <td class="px-4 py-2 font-semibold text-primary">A (95)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <a href="https://drive.google.com/drive/folders/1kqLtL0-D64z64dAf4TrD9ny10-hhS5Du?usp=sharing" target="_blank">
+                        <button class="w-full mt-auto py-2.5 bg-purple-50 hover:bg-purple-100 text-purple-700 font-medium rounded-lg transition-colors flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-download"></i> Unduh / Lihat Dokumen Lengkap
+                        </button>
+                    </a>
+                </div>
+
+                <!-- Lampiran 8 -->
+                <div class="bg-white p-6 rounded-2xl shadow-md border border-purple-100 flex flex-col h-full">
+                    <div class="flex items-center gap-4 border-b border-purple-50 pb-4 mb-4">
+                        <div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center text-secondary">
+                            <i class="fa-solid fa-chalkboard-user text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-800">Lampiran 8</h3>
+                            <p class="text-sm text-slate-500">Instrumen Penilaian Praktik Mengajar</p>
+                        </div>
+                    </div>
+                    <div class="flex-grow">
+                        <p class="text-sm text-slate-600 mb-4">Dokumen ini berisi hasil evaluasi keterampilan mengajar (keterampilan membuka pelajaran, penguasaan materi, pengelolaan kelas) yang dinilai oleh Guru Pamong.</p>
+                        
+                        <div class="overflow-x-auto mb-4 border rounded-lg">
+                            <table class="min-w-full divide-y divide-gray-200 text-sm">
+                                <thead class="bg-purple-50/50">
+                                    <tr>
+                                        <th class="px-4 py-2 text-left font-medium text-purple-900">Siklus</th>
+                                        <th class="px-4 py-2 text-left font-medium text-purple-900">Fokus Keterampilan</th>
+                                        <th class="px-4 py-2 text-left font-medium text-purple-900">Nilai</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-4 py-2">Siklus 1</td>
+                                        <td class="px-4 py-2">Pengelolaan Kelas</td>
+                                        <td class="px-4 py-2 font-semibold text-secondary">A (88)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-2">Siklus 2</td>
+                                        <td class="px-4 py-2">Penggunaan Media</td>
+                                        <td class="px-4 py-2 font-semibold text-secondary">A (93)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-2">Siklus 3</td>
+                                        <td class="px-4 py-2">Evaluasi Pembelajaran</td>
+                                        <td class="px-4 py-2 font-semibold text-secondary">A (96)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <a href="https://drive.google.com/drive/folders/1vuNG8JyBzB0PrvMAE8OT5WQMEI9y_quW?usp=drive_link" target="_blank">
+                        <button class="w-full mt-auto py-2.5 bg-purple-50 hover:bg-purple-100 text-purple-700 font-medium rounded-lg transition-colors flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-download"></i> Unduh / Lihat Dokumen Lengkap
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. MODEL GURU YANG DITUJU -->
+        <section id="model-guru" class="page-section hidden opacity-0">
+            <div class="mb-12 text-center">
+                <h2 class="text-3xl font-bold text-slate-900 mb-3">Model Guru yang Dituju</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto rounded-full mb-6"></div>
+                <p class="text-slate-600 font-serif max-w-2xl mx-auto">
+                    Rancangan misi, kompetensi, dan karakter ideal yang ingin saya bangun untuk menjadi seorang Guru Profesional abad ke-21.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Misi Pribadi -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-purple-100 hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full justify-between">
+                    <div>
+                        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary text-white mb-6 shadow-lg shadow-purple-500/30">
+                            <i class="fa-solid fa-rocket text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-4">Misi Pribadi</h3>
+                        <ul class="text-left space-y-3 text-slate-600 text-sm">
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-secondary mt-1"></i>
+                                <span>Menyelenggarakan pembelajaran yang berpusat pada peserta didik dan menyenangkan.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-secondary mt-1"></i>
+                                <span>Mengintegrasikan teknologi terkini secara bijak untuk memperluas cakrawala siswa.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-secondary mt-1"></i>
+                                <span>Terus melatih budaya refleksi dan mengadopsi ilmu baru tanpa henti.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Kompetensi Ideal -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-purple-100 hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full justify-between">
+                    <div>
+                        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-secondary text-white mb-6 shadow-lg shadow-fuchsia-500/30">
+                            <i class="fa-solid fa-brain text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-4">Kompetensi Abad-21</h3>
+                        <ul class="text-left space-y-3 text-slate-600 text-sm">
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-primary mt-1"></i>
+                                <span><strong>Pedagogical Mastery:</strong> Mampu meramu pendekatan diferensiasi yang adil bagi siswa heterogen.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-primary mt-1"></i>
+                                <span><strong>Digital Literacy:</strong> Terampil mengoperasikan dan mendesain media interaktif berbasis digital.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-primary mt-1"></i>
+                                <span><strong>Sosio-Emosional:</strong> Handal menciptakan atmosfer kelas yang suportif, aman, dan kolaboratif.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Karakter Guru -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-purple-100 hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full justify-between">
+                    <div>
+                        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-500 text-white mb-6 shadow-lg shadow-amber-500/30">
+                            <i class="fa-solid fa-heart text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-4">Karakter & Etika</h3>
+                        <ul class="text-left space-y-3 text-slate-600 text-sm">
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-amber-500 mt-1"></i>
+                                <span><strong>Empati Tinggi:</strong> Sensitif terhadap keunikan latar belakang sosial budaya siswa.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-amber-500 mt-1"></i>
+                                <span><strong>Integritas:</strong> Selaras antara keteladanan tindakan, etika pengajaran, dan cinta tanah air.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-amber-500 mt-1"></i>
+                                <span><strong>Resiliensi:</strong> Adaptif terhadap dinamika transformasi kurikulum pendidikan terkini.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. DOKUMENTASI KEGIATAN -->
+        <section id="dokumentasi" class="page-section hidden opacity-0">
+            <div class="mb-10 text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold text-slate-900 mb-3">Dokumentasi Kegiatan PPL</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto rounded-full mb-6"></div>
+                <p class="text-slate-600 font-serif mb-8">
+                    Rekam jejak integrasi teoretis ke dalam praktik nyata di lapangan, mulai dari masa orientasi sekolah hingga rangkaian siklus Praktik Terbimbing di SMK Negeri 2 Makassar.
+                </p>
+
+                <!-- Interactive Filters (Tanpa opsi "Semua") -->
+                <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-10" id="filter-container">
+                    <button class="filter-btn px-4 py-2 rounded-full text-xs md:text-sm font-semibold transition bg-primary text-white" data-filter="awal">Tahap Awal</button>
+                    <button class="filter-btn px-4 py-2 rounded-full text-xs md:text-sm font-semibold transition bg-purple-100 text-purple-700 hover:bg-purple-200" data-filter="bimbing1">Praktik Terbimbing 1 (3 Siklus)</button>
+                    <button class="filter-btn px-4 py-2 rounded-full text-xs md:text-sm font-semibold transition bg-purple-100 text-purple-700 hover:bg-purple-200" data-filter="bimbing2">Praktik Terbimbing 2 (3 Siklus)</button>
+                    <button class="filter-btn px-4 py-2 rounded-full text-xs md:text-sm font-semibold transition bg-purple-100 text-purple-700 hover:bg-purple-200" data-filter="bimbing3">Praktik Terbimbing 3 (2 Siklus)</button>
+                </div>
+            </div>
+
+            <!-- Dokumentasi Gallery Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-grid">
+                
+                <!-- === TAHAP AWAL (Default Tampil) === -->
+                <!-- Orientasi -->
+                <div class="gallery-item bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 border border-purple-100 flex flex-col h-full" data-category="awal">
+                    <div class="h-48 overflow-hidden bg-purple-50 relative">
+                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80" alt="Orientasi Kampus" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 bg-primary text-white text-xs px-2.5 py-1 rounded-full font-bold">Tahap Awal</div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-secondary uppercase tracking-wider block mb-1">Kegiatan Orientasi</span>
+                            <h4 class="text-lg font-bold text-slate-800 mb-2">Orientasi Lingkungan & Manajemen Sekolah</h4>
+                            <p class="text-slate-600 text-xs leading-relaxed">
+                                Sesi pengenalan kultur sekolah, struktur organisasi tata usaha, sistem kurikulum, dan sarana prasarana yang tersedia di SMK Negeri 2 Makassar guna menyelaraskan penugasan mahasiswa.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Observasi -->
+                <div class="gallery-item bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 border border-purple-100 flex flex-col h-full" data-category="awal">
+                    <div class="h-48 overflow-hidden bg-purple-50 relative">
+                        <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=600&q=80" alt="Observasi Kelas" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 bg-primary text-white text-xs px-2.5 py-1 rounded-full font-bold">Tahap Awal</div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-secondary uppercase tracking-wider block mb-1">Kegiatan Observasi</span>
+                            <h4 class="text-lg font-bold text-slate-800 mb-2">Observasi Karakteristik Peserta Didik</h4>
+                            <p class="text-slate-600 text-xs leading-relaxed">
+                                Pengamatan langsung di kelas XI Broadcasting untuk mengidentifikasi keberagaman tingkat kognitif, motivasi belajar, dan gaya belajar siswa guna merancang modul ajar berdiferensiasi.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Asistensi Mengajar -->
+                <div class="gallery-item bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 border border-purple-100 flex flex-col h-full" data-category="awal">
+                    <div class="h-48 overflow-hidden bg-purple-50 relative">
+                        <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80" alt="Asistensi Guru" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 bg-primary text-white text-xs px-2.5 py-1 rounded-full font-bold">Tahap Awal</div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-secondary uppercase tracking-wider block mb-1">Asistensi</span>
+                            <h4 class="text-lg font-bold text-slate-800 mb-2">Asistensi Mengajar Bersama Guru Pamong</h4>
+                            <p class="text-slate-600 text-xs leading-relaxed">
+                                Membantu Guru Pamong dalam mempersiapkan media ajar, mendistribusikan bahan latihan, mendampingi kelompok diskusi kecil, dan merekam presensi harian siswa sebelum memulai mengajar mandiri.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- === PRAKTIK TERBIMBING 1 (Sembunyi saat Load) === -->
+                <!-- PT1 S1 -->
+                <div class="gallery-item bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 border border-purple-100 flex flex-col h-full hidden" data-category="bimbing1">
+                    <div class="h-48 overflow-hidden bg-purple-50 relative">
+                        <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=600&q=80" alt="Kamera Videografi" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 bg-secondary text-white text-xs px-2.5 py-1 rounded-full font-bold">Terbimbing 1</div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-primary uppercase tracking-wider block mb-1">Siklus 1 - XI Broadcasting</span>
+                            <h4 class="text-lg font-bold text-slate-800 mb-2">Pengenalan Dasar Kamera & Pencahayaan</h4>
+                            <p class="text-slate-600 text-xs leading-relaxed">
+                                Penerapan model PBL untuk mengenalkan anatomi kamera video dan tiga titik dasar pencahayaan studio (Three-Point Lighting) melalui demonstrasi fisik secara berkelompok.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PT1 S2 -->
+                <div class="gallery-item bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 border border-purple-100 flex flex-col h-full hidden" data-category="bimbing1">
+                    <div class="h-48 overflow-hidden bg-purple-50 relative">
+                        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=600&q=80" alt="Produksi Gambar" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 bg-secondary text-white text-xs px-2.5 py-1 rounded-full font-bold">Terbimbing 1</div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-primary uppercase tracking-wider block mb-1">Siklus 2 - XI Broadcasting</span>
+                            <h4 class="text-lg font-bold text-slate-800 mb-2">Teknik Pengambilan Gambar Terstruktur</h4>
+                            <p class="text-slate-600 text-xs leading-relaxed">
+                                Melatih siswa menerapkan jenis-jenis sudut pengambilan gambar (camera angles) dan ukuran gambar (frame size) yang tepat sesuai dengan panduan skenario sederhana.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PT1 S3 -->
+                <div class="gallery-item bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 border border-purple-100 flex flex-col h-full hidden" data-category="bimbing1">
+                    <div class="h-48 overflow-hidden bg-purple-50 relative">
+                        <img src="https://images.unsplash.com/photo-1535016120720-40c646be5580?auto=format&fit=crop&w=600&q=80" alt="Produksi Video" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 bg-secondary text-white text-xs px-2.5 py-1 rounded-full font-bold">Terbimbing 1</div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-primary uppercase tracking-wider block mb-1">Siklus 3 - XI Broadcasting</span>
+                            <h4 class="text-lg font-bold text-slate-800 mb-2">Produksi Video Pendek Konten Digital</h4>
+                            <p class="text-slate-600 text-xs leading-relaxed">
+                                Penugasan berbasis kelompok untuk merencanakan, mengambil cuplikan, dan merangkai video pendek interaktif berdurasi 1 menit bertemakan promosi program studi penyiaran.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- === PRAKTIK TERBIMBING 2 (Sembunyi saat Load) === -->
+                <!-- PT2 S1 -->
+                <div class="gallery-item bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 border border-purple-100 flex flex-col h-full hidden" data-category="bimbing2">
+                    <div class="h-48 overflow-hidden bg-purple-50 relative">
+                        <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=600&q=80" alt="Penulisan Naskah" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 bg-accent text-white text-xs px-2.5 py-1 rounded-full font-bold">Terbimbing 2</div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-amber-600 uppercase tracking-wider block mb-1">Siklus 1 - XI Perfilman</span>
+                            <h4 class="text-lg font-bold text-slate-800 mb-2">Penulisan Naskah & Rancangan Storyboard</h4>
+                            <p class="text-slate-600 text-xs leading-relaxed">
+                                Membimbing siswa menuangkan ide cerita menjadi struktur naskah audio-visual standar dua kolom dan menggambar visualisasi sketsa ke dalam panel storyboard.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PT2 S2 -->
+                <div class="gallery-item bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 border border-purple-100 flex flex-col h-full hidden" data-category="bimbing2">
+                    <div class="h-48 overflow-hidden bg-purple-50 relative">
+                        <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80" alt="Sutradara" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 bg-accent text-white text-xs px-2.5 py-1 rounded-full font-bold">Terbimbing 2</div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-amber-600 uppercase tracking-wider block mb-1">Siklus 2 - XI Perfilman</span>
+                            <h4 class="text-lg font-bold text-slate-800 mb-2">Manajemen Kru & Syuting Luar Ruangan</h4>
+                            <p class="text-slate-600 text-xs leading-relaxed">
+                                Mengarahkan jalannya proses produksi perfilman siswa di luar kelas. Mengatur peran kru seperti sutradara, kamerawan, penata suara, dan aktor secara disiplin waktu.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PT2 S3 -->
+                <div class="gallery-item bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 border border-purple-100 flex flex-col h-full hidden" data-category="bimbing2">
+                    <div class="h-48 overflow-hidden bg-purple-50 relative">
+                        <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80" alt="Screening Film" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 bg-accent text-white text-xs px-2.5 py-1 rounded-full font-bold">Terbimbing 2</div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-amber-600 uppercase tracking-wider block mb-1">Siklus 3 - XI Perfilman</span>
+                            <h4 class="text-lg font-bold text-slate-800 mb-2">Screening & Evaluasi Kritis Hasil Karya</h4>
+                            <p class="text-slate-600 text-xs leading-relaxed">
+                                Menyelenggarakan kegiatan bedah film karya siswa di lab studio perfilman. Melatih siswa menerima dan memberi masukan teknis secara jujur dan mendidik.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- === PRAKTIK TERBIMBING 3 (Sembunyi saat Load) === -->
+                <!-- PT3 S1 -->
+                <div class="gallery-item bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 border border-purple-100 flex flex-col h-full hidden" data-category="bimbing3">
+                    <div class="h-48 overflow-hidden bg-purple-50 relative">
+                        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=600&q=80" alt="Video Editing" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 bg-purple-800 text-white text-xs px-2.5 py-1 rounded-full font-bold">Terbimbing 3</div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-purple-600 uppercase tracking-wider block mb-1">Siklus 1 - XII Broadcasting</span>
+                            <h4 class="text-lg font-bold text-slate-800 mb-2">Penyuntingan Gambar & Transisi Efek Lanjut</h4>
+                            <p class="text-slate-600 text-xs leading-relaxed">
+                                Melatih ketajaman editing pasca-produksi menggunakan perangkat lunak profesional. Menekankan ketepatan ritme suntingan (cut-to-cut) serta sinkronisasi audio.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PT3 S2 -->
+                <div class="gallery-item bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 border border-purple-100 flex flex-col h-full hidden" data-category="bimbing3">
+                    <div class="h-48 overflow-hidden bg-purple-50 relative">
+                        <img src="https://images.unsplash.com/photo-1610116306796-6ebd3051c330?auto=format&fit=crop&w=600&q=80" alt="Distribusi Film" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 bg-purple-800 text-white text-xs px-2.5 py-1 rounded-full font-bold">Terbimbing 3</div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-purple-600 uppercase tracking-wider block mb-1">Siklus 2 - XII Broadcasting</span>
+                            <h4 class="text-lg font-bold text-slate-800 mb-2">Rendering Format, Distribusi & Penilaian Akhir</h4>
+                            <p class="text-slate-600 text-xs leading-relaxed">
+                                Siswa belajar mengekspor video sesuai format komparasi platform target dan melakukan simulasi rilis media digital disertai evaluasi rubrik asesmen final teoretis dan aplikatif.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-purple-100 mt-auto py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-500 text-sm space-y-2">
+            <p>&copy; 2026 E-Portfolio Nur Akifa Rifai. All rights reserved.</p>
+            <p class="text-xs">Dikembangkan sebagai dokumentasi resmi refleksi awal & integrasi penugasan PPG Calon Guru.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Navigation & Filter Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const navLinksMobile = document.querySelectorAll('.nav-link-mobile');
+            const sections = document.querySelectorAll('.page-section');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            // Toggle Mobile Menu Panel
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Handle Navigation Switches
+            const navigateTo = (targetId) => {
+                // Loop through section panels
+                sections.forEach(section => {
+                    if (section.id === targetId) {
+                        section.classList.remove('hidden');
+                        setTimeout(() => {
+                            section.classList.add('opacity-0', 'translate-y-4');
+                            section.offsetHeight; // force reflow
+                            section.classList.remove('opacity-0', 'translate-y-4');
+                            section.classList.add('animate-fade-in');
+                        }, 50);
+                    } else {
+                        section.classList.add('hidden');
+                        section.classList.remove('animate-fade-in');
+                    }
+                });
+
+                // Update desktop navigation styles
+                navLinks.forEach(link => {
+                    if (link.getAttribute('data-target') === targetId) {
+                        link.classList.add('active-nav');
+                    } else {
+                        link.classList.remove('active-nav');
+                    }
+                });
+
+                // Update mobile navigation styles
+                navLinksMobile.forEach(link => {
+                    if (link.getAttribute('data-target') === targetId) {
+                        link.className = 'nav-link-mobile block px-3 py-3 text-base font-semibold text-primary bg-purple-50 rounded-md text-left';
+                    } else {
+                        link.className = 'nav-link-mobile block px-3 py-3 text-base font-medium text-gray-600 hover:text-primary hover:bg-purple-50 rounded-md text-left';
+                    }
+                });
+
+                // Close mobile menu
+                mobileMenu.classList.add('hidden');
+
+                // Scroll to top smooth
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+
+            // Setup listeners for Desktop links
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    const target = link.getAttribute('data-target');
+                    navigateTo(target);
+                });
+            });
+
+            // Setup listeners for Mobile links
+            navLinksMobile.forEach(link => {
+                link.addEventListener('click', () => {
+                    const target = link.getAttribute('data-target');
+                    navigateTo(target);
+                });
+            });
+
+            // === GALLERY FILTER LOGIC (Tanpa Filter "Semua") ===
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filterValue = button.getAttribute('data-filter');
+
+                    // Reset active state for buttons
+                    filterButtons.forEach(btn => {
+                        btn.className = 'filter-btn px-4 py-2 rounded-full text-xs md:text-sm font-semibold transition bg-purple-100 text-purple-700 hover:bg-purple-200';
+                    });
+                    // Set active style on clicked button
+                    button.className = 'filter-btn px-4 py-2 rounded-full text-xs md:text-sm font-semibold transition bg-primary text-white';
+
+                    // Filter gallery items (pencocokan ketat 1:1 tanpa "all")
+                    galleryItems.forEach(item => {
+                        const itemCategory = item.getAttribute('data-category');
+                        if (itemCategory === filterValue) {
+                            item.classList.remove('hidden');
+                        } else {
+                            item.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
